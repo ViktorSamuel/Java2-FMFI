@@ -27,7 +27,7 @@ public class Konstanta implements Term{
 
     @Override
     public boolean isSatisfiable(){
-        return true;
+        return value;
     }
 
     @Override

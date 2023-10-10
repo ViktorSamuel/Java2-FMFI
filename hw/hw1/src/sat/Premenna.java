@@ -31,11 +31,11 @@ public class Premenna implements Term{
 
     @Override
     public boolean isSatisfiable(){
-        return true;
+        return value;
     }
 
     @Override
     public String toString(){
-        return name + " = " + value;
+        return name;
     }
 }
