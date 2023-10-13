@@ -5,21 +5,19 @@ import java.util.Map;
 
 public class Premenna implements Term{
     private String name;
-    private boolean value;
 
-    public Premenna(String name, boolean value){
+    public Premenna(String name){
         this.name = name;
-        this.value = value;
     }
 
     @Override
     public boolean Eval(Map<String, Boolean> values) {
-        return value;
+        return values.getOrDefault(this.name, false);
     }
 
     @Override
     public Term negate() {
-        return new Premenna(name, !value);
+        return new Negacia(this);
     }
 
     @Override
@@ -31,7 +29,7 @@ public class Premenna implements Term{
 
     @Override
     public boolean isSatisfiable(){
-        return value;
+        return true;
     }
 
     @Override

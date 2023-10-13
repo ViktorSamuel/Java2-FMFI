@@ -1,10 +1,7 @@
 package sat.tests;
 
 import org.junit.Test;
-import sat.Implikacia;
-import sat.Premenna;
-import sat.Term;
-
+import sat.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,73 +10,94 @@ import static org.junit.Assert.*;
 public class ImplikaciaTest {
 
     @Test
-    public void testEvalTrueIfLeftFalseRightTrue() {
-        Term left = new Premenna("var1", false);
-        Term right = new Premenna("var2", true);
-        Implikacia implikacia = new Implikacia(left, right);
-        Map<String, Boolean> values = new HashMap<>();
-        assertTrue(implikacia.Eval(values));
-    }
+    public void testEva() {
+        // term: (x AND false -> (y OR !z)
+        ArrayList<Term> andTerms = new ArrayList<>();
+        andTerms.add(new Premenna("x"));
+        andTerms.add((new Konstanta(true)).negate());
+        And andTerm = new And(andTerms);
 
-    @Test
-    public void testEvalTrueIfLeftTrueRightTrue() {
-        Term left = new Premenna("var1", true);
-        Term right = new Premenna("var2", true);
-        Implikacia implikacia = new Implikacia(left, right);
-        Map<String, Boolean> values = new HashMap<>();
-        assertTrue(implikacia.Eval(values));
-    }
+        ArrayList<Term> orTerms = new ArrayList<>();
+        orTerms.add(new Premenna("y"));
+        orTerms.add((new Premenna("z")).negate());
+        Or orTerm = new Or(orTerms);
 
-    @Test
-    public void testEvalFalseIfLeftTrueRightFalse() {
-        Term left = new Premenna("var1", true);
-        Term right = new Premenna("var2", false);
-        Implikacia implikacia = new Implikacia(left, right);
+        Implikacia implikacia = new Implikacia(andTerm, orTerm);
+
         Map<String, Boolean> values = new HashMap<>();
-        assertFalse(implikacia.Eval(values));
+        values.put("x", true);
+        values.put("y", false);
+        values.put("z", true);
+
+        assertTrue(implikacia.Eval(values));
     }
 
     @Test
     public void testNegate() {
-        Term left = new Premenna("var1", true);
-        Term right = new Premenna("var2", false);
+        Term left = new Premenna("x");
+        Term right = (new Premenna("y")).negate();
         Implikacia implikacia = new Implikacia(left, right);
-        Term negated = implikacia.negate();
-        assertTrue(negated.Eval(new HashMap<>()));
+
+        Term negatedTerm = implikacia.negate();
+
+        assertTrue(negatedTerm instanceof And);
     }
 
     @Test
     public void testGetVariables() {
-        Term left = new Premenna("var1", true);
-        Term right = new Premenna("var2", false);
-        Implikacia implikacia = new Implikacia(left, right);
+        // term: (x OR y) -> (z AND !x)
+        ArrayList<Term> orTerms = new ArrayList<>();
+        orTerms.add(new Premenna("x"));
+        orTerms.add(new Premenna("y"));
+        Or orTerm = new Or(orTerms);
+
+        ArrayList<Term> andTerms = new ArrayList<>();
+        andTerms.add(new Premenna("z"));
+        andTerms.add((new Premenna("x")).negate());
+        And andTerm = new And(andTerms);
+
+        Implikacia implikacia = new Implikacia(orTerm, andTerm);
+
         ArrayList<String> variables = implikacia.getVariables();
-        assertEquals(2, variables.size());
-        assertTrue(variables.contains("var1"));
-        assertTrue(variables.contains("var2"));
+
+        assertTrue(variables.contains("x"));
+        assertTrue(variables.contains("y"));
+        assertTrue(variables.contains("z"));
     }
 
     @Test
-    public void testIsSatisfiableBothSatisfiable() {
-        Term left = new Premenna("var1", true);
-        Term right = new Premenna("var2", false);
-        Implikacia implikacia = new Implikacia(left, right);
-        assertFalse(implikacia.isSatisfiable());
-    }
+    public void testIsSatisfiable() {
+        // unsatisfiable term: (x OR !x) -> (y AND !y)
+        ArrayList<Term> orTerms = new ArrayList<>();
+        orTerms.add(new Premenna("x"));
+        orTerms.add((new Premenna("x")).negate());
+        Or orTerm = new Or(orTerms);
 
-    @Test
-    public void testIsSatisfiableRightUnsatisfiable() {
-        Term left = new Premenna("var1", false);
-        Term right = new Premenna("var2", false);
-        Implikacia implikacia = new Implikacia(left, right);
+        ArrayList<Term> andTerms = new ArrayList<>();
+        andTerms.add(new Premenna("y"));
+        andTerms.add((new Premenna("y")).negate());
+        And andTerm = new And(andTerms);
+
+        Implikacia implikacia = new Implikacia(orTerm, andTerm);
+
         assertFalse(implikacia.isSatisfiable());
     }
 
     @Test
     public void testToString() {
-        Term left = new Premenna("var1", true);
-        Term right = new Premenna("var2", false);
-        Implikacia implikacia = new Implikacia(left, right);
-        assertEquals("(var1 -> var2)", implikacia.toString());
+        // term: (x AND !y) -> (z OR w)
+        ArrayList<Term> andTerms = new ArrayList<>();
+        andTerms.add(new Premenna("x"));
+        andTerms.add((new Premenna("y")).negate());
+        And andTerm = new And(andTerms);
+
+        ArrayList<Term> orTerms = new ArrayList<>();
+        orTerms.add(new Premenna("z"));
+        orTerms.add(new Premenna("w"));
+        Or orTerm = new Or(orTerms);
+
+        Implikacia implikacia = new Implikacia(andTerm, orTerm);
+
+        assertEquals("((x AND !y) -> (z OR w))", implikacia.toString());
     }
 }

@@ -40,12 +40,7 @@ public class Or implements Term{
 
     @Override
     public boolean isSatisfiable(){
-        for(Term term : terms){
-            if(term.isSatisfiable()){
-                return true;
-            }
-        }
-        return false;
+        return Satisfiable.isSatisfiable(terms.size(), this);
     }
 
     @Override

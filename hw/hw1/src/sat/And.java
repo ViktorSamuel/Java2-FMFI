@@ -31,7 +31,7 @@ public class And implements Term{
 
     @Override
     public ArrayList<String> getVariables(){
-        ArrayList<String> variables = new ArrayList<String>();
+        ArrayList<String> variables = new ArrayList<>();
         for(Term term : terms){
             variables.addAll(term.getVariables());
         }
@@ -40,12 +40,7 @@ public class And implements Term{
 
     @Override
     public boolean isSatisfiable(){
-        for(Term term : terms){
-            if(!term.isSatisfiable()){
-                return false;
-            }
-        }
-        return true;
+        return Satisfiable.isSatisfiable(this.getVariables().size(), this);
     }
 
     @Override

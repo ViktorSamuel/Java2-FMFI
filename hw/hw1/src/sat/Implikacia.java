@@ -35,7 +35,7 @@ public class Implikacia implements Term{
 
     @Override
     public boolean isSatisfiable(){
-        return left.isSatisfiable() && right.isSatisfiable();
+        return !left.isSatisfiable() || right.isSatisfiable();
     }
 
     @Override
