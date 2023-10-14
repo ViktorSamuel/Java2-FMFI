@@ -51,4 +51,29 @@ public class Team implements WorkUnit {
         }
         return repr;
     }
+
+    @Override
+    public int getCurrentWorkload() {
+        int workload = 0;
+        for (WorkUnit workUnit : this.team) {
+            workload += workUnit.getCurrentWorkload();
+        }
+        return workload;
+    }
+
+    @Override
+    public WorkUnit getWorkerWithLowestWorkload() {
+        WorkUnit workerWithLowestWorkload = this.team.get(0);
+        for (WorkUnit workUnit : this.team){
+            if (workUnit.getWorkerWithLowestWorkload().getCurrentWorkload() < workerWithLowestWorkload.getCurrentWorkload()){
+                workerWithLowestWorkload = workUnit.getWorkerWithLowestWorkload();
+            }
+        }
+        return workerWithLowestWorkload;
+    }
+
+    @Override
+    public void addCurrentWorkload(int workload) {
+        this.getWorkerWithLowestWorkload().addCurrentWorkload(workload);
+    }
 }
