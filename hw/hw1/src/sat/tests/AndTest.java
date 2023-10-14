@@ -41,6 +41,21 @@ public class AndTest {
     }
 
     @Test
+    public void testEvalContradiction() {
+        ArrayList<Term> falseTerms = new ArrayList<>();
+        Premenna x = new Premenna("x");
+        falseTerms.add(x);
+        falseTerms.add(x.negate());
+
+        And and = new And(falseTerms);
+
+        Map<String, Boolean> values = new HashMap<>();
+        values.put("x", true);
+
+        assertFalse(and.Eval(values));
+    }
+
+    @Test
     public void testNegate() {
         ArrayList<Term> terms = new ArrayList<>();
         terms.add(new Konstanta(true));
