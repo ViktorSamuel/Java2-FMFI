@@ -1,6 +1,6 @@
 package workbalance;
 
-public class Test {
+public class Client {
     public static void main(String[] args) {
         Worker worker1 = new Worker("Worker 1", 100);
         Worker worker2 = new Worker("Worker 2", 200);
