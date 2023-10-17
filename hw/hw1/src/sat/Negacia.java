@@ -23,7 +23,7 @@ public class Negacia implements Term{
     }
 
     public boolean isSatisfiable(){
-        return true;
+        return term.isSatisfiable();
     }
 
     public String toString(){
