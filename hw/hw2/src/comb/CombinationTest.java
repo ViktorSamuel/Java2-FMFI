@@ -43,4 +43,18 @@ public class CombinationTest {
         }
         assertTrue(result.containsAll(expected));
     }
+
+    @Test
+    public void testCombination44(){
+        List<Character> list = Arrays.asList('a','b','c','d');
+        Combinations<Character> combinations = new Combinations<>(list, 4);
+        List<List<Character>> result = new ArrayList<>();
+        List<List<Character>> expected = Arrays.asList(
+                Arrays.asList('a','b','c','d')
+        );
+        while (combinations.hasNext()){
+            result.add(combinations.next());
+        }
+        assertTrue(result.containsAll(expected));
+    }
 }
