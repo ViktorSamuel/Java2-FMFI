@@ -3,21 +3,6 @@ public class MonitorConfiguration {
     private int brightness;
     private int frequency;
 
-    // private String fileName = "monitorConfiguration.txt";
-    //    try {
-//        FileOutputStream file = new FileOutputStream(fileName);
-//        ObjectOutputStream objectOutputStream = new ObjectOutputStream(file);
-//
-//        Memento memento = new Memento(this);
-//        objectOutputStream.writeObject(memento);
-//
-//        objectOutputStream.close();
-//        file.close();
-//
-//    } catch (IOException e) {
-//        e.printStackTrace();
-//    }
-
     public MonitorConfiguration(int contrast, int brightness, int frequency) {
         this.contrast = contrast;
         this.brightness = brightness;
