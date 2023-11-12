@@ -1,3 +1,5 @@
+package memento;// import java.io.Serializable;
+
 public class MonitorConfiguration {
     private int contrast;
     private int brightness;
@@ -33,17 +35,19 @@ public class MonitorConfiguration {
         this.frequency = frequency;
     }
 
+    // posiiility to save into file using ObjectOutputStream.writeObject()
     public Memento saveToMemento() {
         return new Memento(this);
     }
 
+    // posiiility to read from file using ObjectInputStream.readObject() and delete what was read
     public void restoreFromMemento(Memento memento) {
         this.contrast = memento.contrast;
         this.brightness = memento.brightness;
         this.frequency = memento.frequency;
     }
 
-    public static class Memento {
+    public static class Memento { // if wannted to write into file must: implements Serializable
         private final int contrast;
         private final int brightness;
         private final int frequency;
