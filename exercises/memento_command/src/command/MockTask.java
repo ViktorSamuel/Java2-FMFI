@@ -1,23 +1,28 @@
 package command;
 
 public class MockTask implements Command{
-    private int duration;
     private int id;
+    private int duration;
 
-    public MockTask(int duration, int id) {
-        this.duration = duration;
+    public MockTask(int id, int duration) {
         this.id = id;
+        this.duration = duration;
     }
 
     @Override
-    public void execute() {
-        System.out.println("Executing task " + id + " for " + duration + " seconds");
-        try {
-            Thread.sleep(duration * 1000);
-        } catch (InterruptedException e) {
+    public void execute(){
+        try{
+            Thread.sleep(duration);
+            System.out.println("Task " + id + " finished");
+        }
+        catch(InterruptedException e){
             e.printStackTrace();
         }
-        System.out.println("Task " + id + " finished");
+    }
+
+    @Override
+    public void undo(){
+
     }
 
 }
