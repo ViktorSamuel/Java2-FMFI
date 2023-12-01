@@ -180,8 +180,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        //testFiniteAutomaton(); // odkomentujte, ak chcete mat bodovanu prvu podulohu
-        //testMultiSearch(); // odkomentujte, ak chcete mat bodovanu druhu podulohu
-        //testMultiSort(); // odkomentujte, ak chcete mat bodovanu tretiu podulohu
+        testFiniteAutomaton();
+        testMultiSearch();
+        testMultiSort();
     }
 }

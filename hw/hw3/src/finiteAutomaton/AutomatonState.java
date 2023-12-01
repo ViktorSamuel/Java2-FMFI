@@ -1,5 +1,6 @@
 package finiteAutomaton;
 
 interface AutomatonState {
-    // @TODO ...
+    boolean isAcceptingState();
+    AutomatonState transition(char c);
 }

@@ -1,12 +1,17 @@
 package finiteAutomaton;
 
 public class FiniteAutomaton {
+    private AutomatonState currentState;
+
+    public FiniteAutomaton() {
+        this.currentState = new StateA();
+    }
+
     public boolean isAcceptingState() {
-        // @TODO ...
-        return false;
+        return currentState.isAcceptingState();
     }
 
     public void transition(char c) {
-        // @TODO ...
+        currentState = currentState.transition(c);
     }
 }
