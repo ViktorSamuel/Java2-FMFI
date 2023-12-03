@@ -13,7 +13,7 @@ class StateB implements AutomatonState {
         } else if (c == 'b') {
             return new StateC();
         } else {
-            return this;
+            return null;
         }
     }
 }

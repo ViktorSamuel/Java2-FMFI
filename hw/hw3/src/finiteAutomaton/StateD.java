@@ -11,9 +11,9 @@ class StateD implements AutomatonState {
         if (c == 'a') {
             return new StateC();
         } else if (c == 'b') {
-            return new StateD();
-        } else {
             return this;
+        } else {
+            return null;
         }
     }
 }

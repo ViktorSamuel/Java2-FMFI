@@ -10,8 +10,10 @@ class StateC implements AutomatonState {
     public AutomatonState transition(char c) {
         if (c == 'b') {
             return new StateD();
-        } else {
+        } else if (c == 'a') {
             return this;
+        } else {
+            return null;
         }
     }
 }

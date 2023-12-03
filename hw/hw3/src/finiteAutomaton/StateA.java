@@ -10,8 +10,9 @@ class StateA implements AutomatonState {
     public AutomatonState transition(char c) {
         if (c == 'a') {
             return new StateB();
-        } else {
+        } else if (c == 'b') {
             return this;
         }
+        return null;
     }
 }
