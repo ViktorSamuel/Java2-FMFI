@@ -1,20 +1,22 @@
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class Compose extends CompositeFun {
+    private List<Fun> reversedFunctions;
 
     public Compose(Fun... functions) {
         super(functions[0], Arrays.copyOfRange(functions, 1, functions.length));
+        reversedFunctions = Arrays.asList(functions);
+        Collections.reverse(reversedFunctions);
     }
 
     @Override
     public Double eval(Double input) {
-        Collections.reverse(functions);
-        double result = functions.stream()
+        double result = reversedFunctions.stream()
                 .mapToDouble(function -> function.eval(input))
                 .reduce((x, y) -> y)
                 .orElse(0.0);
-        Collections.reverse(functions);
         return result;
     }
 }

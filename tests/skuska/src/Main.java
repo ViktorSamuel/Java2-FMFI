@@ -1,3 +1,5 @@
+
+
 public class Main {
     public static void main(String[] args) {
         Strategy defaultStrategy = DefaultStrategy.getInstance();
@@ -25,5 +27,8 @@ public class Main {
 
         Fun timeShift = new TimeShiftDecorator(sin, 2.0);
         System.out.println("TimeShift(Sin, 2)(1) " + timeShift.eval(1.0));
+
+
     }
+
 }
