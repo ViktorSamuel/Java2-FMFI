@@ -2,13 +2,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class Max extends Fun {
-
-    private ArrayList<Fun> functions;
+public class Max extends CompositeFun {
 
     public Max(Fun... functions) {
-        super(Arrays.stream(functions).map(Fun::getName).collect(Collectors.joining(" , ", "{", "}")));
-        this.functions = new ArrayList<>(Arrays.asList(functions));
+        super(functions[0], Arrays.copyOfRange(functions, 1, functions.length));
     }
 
     @Override

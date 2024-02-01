@@ -1,8 +1,8 @@
-import java.util.Optional;
+
 
 public class Recip extends Fun {
-    public Recip() {
-        super("Recip");
+    public Recip(Strategy strategy) {
+        super(strategy);
     }
     @Override
     public Double eval(Double x) {

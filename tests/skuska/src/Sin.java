@@ -1,8 +1,7 @@
-import java.util.Optional;
 
 public class Sin extends Fun{
-    public Sin() {
-        super("Sin");
+    public Sin(Strategy strategy) {
+        super(strategy);
     }
     @Override
     public Double eval(Double x) {

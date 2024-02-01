@@ -9,11 +9,6 @@ public class TimeShiftDecorator extends Decorator {
     }
 
     @Override
-    public String getName() {
-        return " TimeShift "+f.getName()+" by "+delta;
-    }
-
-    @Override
     public Double eval(Double x){
         return f.eval(x-delta);
     }

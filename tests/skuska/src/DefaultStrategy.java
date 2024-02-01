@@ -1,4 +1,3 @@
-import java.util.OptionalDouble;
 import static java.lang.Math.sin;
 import static java.lang.Math.exp;
 public class DefaultStrategy implements Strategy {

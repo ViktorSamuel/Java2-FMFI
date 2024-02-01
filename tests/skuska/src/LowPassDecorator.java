@@ -10,11 +10,6 @@ public class LowPassDecorator extends Decorator {
     }
 
     @Override
-    public String getName() {
-        return g.getName()+" LowPass "+f.getName();
-    }
-
-    @Override
     public Double eval(Double x){
         if(f.eval(x) < g.eval(x))
             return f.eval(x);
