@@ -1,8 +1,8 @@
 
 
 public class Recip extends Fun {
-    public Recip(Strategy strategy) {
-        super(strategy);
+    public Recip() {
+        super(new NoapStrategy());
     }
     @Override
     public Double eval(Double x) {
