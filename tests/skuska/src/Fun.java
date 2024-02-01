@@ -1,4 +1,3 @@
-import java.util.Optional;
 
 public abstract class Fun {
     protected Strategy strategy;
