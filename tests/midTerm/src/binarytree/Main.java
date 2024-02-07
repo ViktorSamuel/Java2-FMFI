@@ -51,13 +51,26 @@ public class Main {
         BinaryTreeNode<Integer> t2 = new InternalTreeNode<>(8, t1, new Leaf<>(10));
         BinaryTreeNode<Integer> t3 = new InternalTreeNode<>(8, t2, new Leaf<>(-10));
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //        testPrettyPrint(Arrays.asList(t1, t2, t3), Arrays.asList(
 //                            "(val: 7 (val: 4) (val: 6))",
 //                            "(val: 8 (val: 7 (val: 4) (val: 6)) (val: 10))",
 //                            "(val: 8 (val: 8 (val: 7 (val: 4) (val: 6)) (val: 10)) (val: -10))"));
-
+//
 //        testDepthVisitor(Arrays.asList(t1, t2, t3), Arrays.asList(1, 2, 3));
-
-
     }
 }

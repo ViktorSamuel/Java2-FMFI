@@ -1,2 +1,5 @@
-package binarytree;public interface Memo {
+package binarytree;
+
+public interface Memo<T> {
+
 }

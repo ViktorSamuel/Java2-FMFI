@@ -6,6 +6,7 @@ public class Leaf<T> implements BinaryTreeNode<T> {
     public Leaf(T val) {
         this.val = val;
     }
+
     @Override
     public T getValue() {
         return this.val;
@@ -17,27 +18,27 @@ public class Leaf<T> implements BinaryTreeNode<T> {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "(val: " + this.val + ")";
     }
 
-    public Memento saveToMemento() {
-        return new Memento(this.val);
+    public Memo<T> saveToMemento() {
+        return new Memento<T>(this);
     }
 
-    public void restoreFromMemento(Memento m) {
-        val = (T) m.getVal();
+    public void restoreFromMemento(Memento<T> m) {
+        this.val = m.getVal();
     }
 
-    public static class Memento<T> {
-        private T val;
+    public class Memento<T> implements Memo<T>{
+        private T mVal;
 
-        private Memento(T val){
-            this.val = val;
+        private Memento(BinaryTreeNode<T> node) {
+            mVal = node.getValue();
         }
 
         private T getVal() {
-            return this.val;
+            return mVal;
         }
     }
 }

@@ -30,41 +30,36 @@ public class InternalTreeNode<T> implements BinaryTreeNode<T> {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "(val: " + this.val + " " + this.left.toString() + " " + this.right.toString() + ")";
     }
 
-    public Memento saveToMemento() {
-        return new Memento(this.val, this.left.saveToMemento(), this.right.saveToMemento());
+    public Memo<T> saveToMemento() {
+        return new Memento<T>(this, this.left, this.right);
     }
 
-    public void restoreFromMemento(Memento m) {
-        this.val = (T) m.getVal();
-        this.left = m.getLeft();
-        this.right = m.getRight();
-    }
+    public class Memento<T> implements Memo<T>{
+        private T mVal;
+        private Memento<T> mLeft, mRight;
 
-    public static class Memento<T>{
-        private T mementoVal;
-        private Memento<T> mementoLeft;
-        private Memento<T> mementoRight;
+        private Memento(BinaryTreeNode<T> node) {
+            mVal = node.getValue();
+            if(mLeft == null)
+                mLeft = new Memento<T>(node);
+            else if (mRight == null) {
+                mRight = new Memento<T>(node);
+            }
+        }
 
-        public Memento(T val, Memento<T> left, Memento<T> right){
-            this.mementoVal = val;
-            this.mementoLeft = left;
-            this.mementoRight = right;
+        private Memento(BinaryTreeNode<T> node, BinaryTreeNode<T> leftNode, BinaryTreeNode<T> rightNode) {
+            mVal = node.getValue();
+            mLeft = new Memento<T>(leftNode);
+            mRight = new Memento<T>(rightNode);
         }
 
         private T getVal() {
-            return this.mementoVal;
+            return mVal;
         }
 
-        private BinaryTreeNode<T> getLeft() {
-            return this.restoreFromMemento(this.mementoLeft);
-        }
-
-        private BinaryTreeNode<T> getRight() {
-            return this.restoreFromMemento(this.mementoRight);
-        }
     }
 }
